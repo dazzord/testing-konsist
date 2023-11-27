@@ -3,6 +3,7 @@ package com.architecture.usecases
 import com.architecture.extentions.appendShouldHaveTest
 import com.architecture.extentions.appendShouldResideIn
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.container.KoScope
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.DynamicTest
@@ -15,9 +16,10 @@ open class UseCaseKonsistTest{
     private val useCasesPackageLocation = "..domain.usecase.."
     private val  USE_CASE = "UseCase"
 
-    @TestFactory
-    fun `use case test`(): Stream<DynamicTest> = Konsist
-        .scopeFromProject()
+    protected var scope: KoScope = Konsist.scopeFromProject()
+
+
+    fun `use case test`(): Stream<DynamicTest> = scope
         .classes()
         .withNameEndingWith(USE_CASE)
         .stream()

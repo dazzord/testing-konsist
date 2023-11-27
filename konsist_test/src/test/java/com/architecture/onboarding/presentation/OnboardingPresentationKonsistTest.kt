@@ -13,10 +13,14 @@ import java.util.stream.Stream
 
 open class OnboardingPresentationKonsistTest: UseCaseKonsistTest(){
 
-   private val onboardingPresentationModule = Konsist.scopeFromDirectory("com.tydev.onboarding.presentation")
+    init {
+        scope = Konsist.scopeFromModule("onboarding/onboarding-presentation/src/main/java/com.tydev.onboarding.presentation")
+    }
+
+   private val onboardingPresentationModule = Konsist.scopeFromDirectory("onboarding/onboarding-presentation/src/main/java/com/tydev/onboarding/presentation")
 
    private val appArchitecture = architecture{
-        val layerOnboardingPresentation = Layer(Global.ModuleNames.onboardingPresentation, Global.ModulePackages.onboardingPresentation)
+        val layerOnboardingPresentation = Layer(Global.ModuleNames.onboardingPresentation, "com.tydev.onboarding.presentation..")
 
         val onboardingDomain = Layer(
             Global.ModuleNames.onboardingDomain,
@@ -30,5 +34,10 @@ open class OnboardingPresentationKonsistTest: UseCaseKonsistTest(){
     @Test
     fun `architecture layers of app module have dependencies correct`(){
         onboardingPresentationModule.assertArchitecture(appArchitecture)
+    }
+
+    @TestFactory
+    fun genericUseCaseTest(){
+        `use case test`()
     }
 }

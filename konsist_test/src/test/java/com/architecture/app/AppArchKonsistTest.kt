@@ -13,6 +13,10 @@ import java.util.stream.Stream
 
 class AppArchKonsistTest: UseCaseKonsistTest(){
 
+    init {
+        scope = Konsist.scopeFromDirectory(Global.ModulePackages.appPackage)
+    }
+
    private val appModuleScope = Konsist.scopeFromProject()
 
    private val appArchitecture = architecture{
