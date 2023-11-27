@@ -5,6 +5,9 @@ pipeline {
         DIR = 'testing-konsist'
         ANDROID_HOME = '/var/jenkins_home/sdk'
     }
+    options{
+        disableConcurrentBuilds()
+    }
     stages {
         stage('Check Github') {
             steps {
